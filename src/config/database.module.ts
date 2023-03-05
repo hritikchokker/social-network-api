@@ -2,6 +2,7 @@
 import { Module } from '@nestjs/common';
 import { NestApplication } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Post } from 'src/modules/post/entities/post.entity';
 import { User } from 'src/modules/user/entities/user.entity';
 import { DataSource } from 'typeorm';
 
@@ -13,7 +14,7 @@ import { DataSource } from 'typeorm';
             port: 5432,
             username: 'postgres',
             password: '1234',
-            entities: [User],
+            entities: [User, Post],
             database: 'social_network',
             synchronize: true,
         }),

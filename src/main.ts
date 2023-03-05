@@ -10,7 +10,7 @@ async function bootstrap() {
       origin: '*'
     });
     app.useLogger(false);
-    app.useGlobalFilters(new HttpExceptionFilter());
+    // app.useGlobalFilters(new HttpExceptionFilter());
     await app.listen(3000);
     console.log('server is listening at ', 3000);
   } catch (error) {

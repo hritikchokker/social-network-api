@@ -9,7 +9,7 @@ import { HttpExceptionFilter } from 'src/common/httpresponse/http_exception.filt
 import { Response } from 'express';
 
 // @UseInterceptors(HttpResponseInterceptor)
-@UseFilters(new HttpExceptionFilter())
+// @UseFilters(new HttpExceptionFilter())
 @Controller('user')
 export class UserController {
   constructor(

@@ -1,43 +1,21 @@
 
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { User } from "src/modules/user/entities/user.entity";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
 
 @Entity()
 export class Post {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({
-        length: 30,
-        nullable: false,
-    })
-    firstName: string
 
-    @Column({
-        length: 30,
-        nullable: false,
-    })
-    lastName: string
+    @Column()
+    title: string;
 
-    @Column({
-        nullable: false,
-    })
-    dateOfBirth: string
+    @Column()
+    content: string;
 
-    @Column({
-        enum: ['MALE', 'FEMALE', 'OTHER']
-    })
-    gender: 'MALE' | 'FEMALE' | 'OTHER'
-
-    @Column({
-        length: 90,
-        unique: true
-    })
-    email: string
-
-    @Column({
-        length: 40
-    })
-    password: string
+    @ManyToOne(() => User, user => user.posts)
+    user: User;
 
     @Column({
         default: true
