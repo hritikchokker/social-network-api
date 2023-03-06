@@ -1,4 +1,6 @@
+import { Comment } from "src/modules/comment/entities/comment.entity"
 import { Post } from "src/modules/post/entities/post.entity"
+import { Session } from "src/modules/session/entities/session.entity"
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
 
 @Entity()
@@ -35,7 +37,7 @@ export class User {
     email: string
 
     @Column({
-        length: 40
+        length: 150
     })
     password: string
 
@@ -46,4 +48,10 @@ export class User {
 
     @OneToMany(() => Post, post => post.user)
     posts: Post[];
+
+    @OneToMany(() => Comment, comment => comment.user)
+    comments: Comment[];
+
+    @OneToMany(() => Session, session => session.user)
+    sessions: Session[];
 }

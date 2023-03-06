@@ -10,12 +10,15 @@ import { AuthModule } from './modules/auth/auth.module';
 import { LocalStrategy } from './modules/auth/local.auth';
 import { CommentModule } from './modules/comment/comment.module';
 import { PostModule } from './modules/post/post.module';
+import { SessionModule } from './modules/session/session.module';
 import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
     DatabaseModule,
     PostModule,
+    SessionModule,
+    UserModule,
     CommentModule,
     AuthModule,
   ],

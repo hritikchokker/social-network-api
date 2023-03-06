@@ -17,8 +17,17 @@ export class AuthController {
   constructor(private readonly authService: AuthService) { }
 
   @Post('login')
-  async login(@Request() req) {
-    return this.authService.login(req.user);
+  async login(@Body() userDetails: { email: string, password: string }, @Res() res: Response) {
+    try {
+      const token = await this.authService.login(userDetails);
+      return res.status(200).json({
+        statusCode: 200,
+        message: 'Login sucess',
+        token
+      });
+    } catch (error) {
+      return res.status(error?.statusCode)?.json({ ...error })
+    }
   }
 
 

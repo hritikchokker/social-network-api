@@ -7,6 +7,10 @@ import { JwtModule } from '@nestjs/jwt';
 import { LocalStrategy } from './local.auth';
 import { UserService } from '../user/user.service';
 import { JwtStrategy } from './jwt.strategy';
+import { SessionModule } from '../session/session.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Session } from '../session/entities/session.entity';
+import { User } from '../user/entities/user.entity';
 @Module({
   imports: [
     JwtModule.register({
@@ -14,10 +18,10 @@ import { JwtStrategy } from './jwt.strategy';
       signOptions: { expiresIn: '2h' }
     }),
     PassportModule,
-    UserModule,
+    TypeOrmModule.forFeature([User,Session])
   ],
   controllers: [AuthController],
-  providers: [AuthService, UserService, JwtStrategy],
-  exports: [JwtModule, PassportModule, UserModule]
+  providers: [AuthService, JwtStrategy],
+  exports: [JwtModule, PassportModule]
 })
 export class AuthModule { }

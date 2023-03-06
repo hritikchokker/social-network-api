@@ -7,13 +7,16 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthService } from '../auth/auth.service';
 import { NestApplication } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
+import { Session } from '../session/entities/session.entity';
 
 @Injectable()
 export class UserService {
 
   constructor(
     @InjectRepository(User)
-    private usersRepository: Repository<User>
+    private usersRepository: Repository<User>,
+    @InjectRepository(Session)
+    private sessionRepository: Repository<Session>
   ) {
     //  this.dataSource.dropDatabase().then();
   }
@@ -44,7 +47,7 @@ export class UserService {
     return this.usersRepository.find();
   }
 
-  findOne(id: number):Promise<User> {
+  findOne(id: number): Promise<User> {
     return this.usersRepository.findOne({ where: { id } });
   }
 

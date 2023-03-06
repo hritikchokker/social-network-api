@@ -1,6 +1,7 @@
 
+import { Comment } from "src/modules/comment/entities/comment.entity";
 import { User } from "src/modules/user/entities/user.entity";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm"
 
 @Entity()
 export class Post {
@@ -21,4 +22,7 @@ export class Post {
         default: true
     })
     isActive: boolean
+
+    @OneToMany(() => Comment, comment => comment.post)
+    comments: Comment[];
 }
